@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onSearch?: (query: string) => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
   const [deliveryType, setDeliveryType] = useState<'delivery' | 'pickup'>('delivery');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    if (onSearch && searchQuery.trim()) {
+      onSearch(searchQuery.trim());
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <section className="food-hero bg-gradient-to-r from-orange-50 to-red-50 py-16 px-4">
@@ -47,11 +64,17 @@ export const HeroSection: React.FC = () => {
             <div className="flex-1 mb-4 md:mb-0 md:mr-4">
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={handleKeyPress}
                 placeholder="What do you like to eat today?"
                 className="food-search-input w-full px-6 py-4 text-lg border-0 focus:outline-none focus:ring-0"
               />
             </div>
-            <button className="food-find-meal-btn bg-orange-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-orange-600 transition-colors w-full md:w-auto">
+            <button 
+              onClick={handleSearch}
+              className="food-find-meal-btn bg-orange-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-orange-600 transition-colors w-full md:w-auto"
+            >
               Find Meal
             </button>
           </div>
