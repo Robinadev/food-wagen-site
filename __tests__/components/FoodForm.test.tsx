@@ -1,6 +1,8 @@
 import React from 'react';
+import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { FoodForm } from '../../../components/forms/FoodForm';
+import { FoodForm } from '../../components/forms/FoodFOrm';
+import test, { describe } from 'node:test';
 
 describe('FoodForm', () => {
   test('validates required fields', async () => {
