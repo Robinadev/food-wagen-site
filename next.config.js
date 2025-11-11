@@ -7,16 +7,12 @@ const nextConfig = {
     unoptimized: true,
   },
   typescript: {
-    ignoreBuildErrors: true, // TEMPORARY: Set to true to bypass TypeScript errors
+    ignoreBuildErrors: true,
   },
   eslint: {
-    ignoreDuringBuilds: true, // TEMPORARY: Set to true to bypass ESLint errors
+    ignoreDuringBuilds: true,
   },
   trailingSlash: true,
-  
-}
+};
 
-module.exports = nextConfig
-
-
-
+module.exports = nextConfig;
