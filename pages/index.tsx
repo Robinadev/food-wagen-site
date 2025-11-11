@@ -1,78 +1,158 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import React, { useState } from 'react';
+import { FoodItem, CreateFoodData } from '../types/food';
+import { FoodCard } from '../components/ui/FoodCard';
+import { FoodModal } from '../components/ui/FoodModal';
+import { SearchBar } from '../components/ui/SearchBar';
+import { Header } from '../components/layout/Header';
+import { Footer } from '../components/layout/Footer';
+import { useFoods } from '../hooks/useFoods';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export default function HomePage() {
+  const {
+    foods,
+    loading,
+    error,
+    searchTerm,
+    actions: { handleSearch, createFood, updateFood, deleteFood },
+  } = useFoods();
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingFood, setEditingFood] = useState<FoodItem | null>(null);
+  const [operationLoading, setOperationLoading] = useState(false);
 
-export default function Home() {
+  const handleAddFood = () => {
+    setEditingFood(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEditFood = (food: FoodItem) => {
+    setEditingFood(food);
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteFood = async (id: string) => {
+    if (confirm('Are you sure you want to delete this food item?')) {
+      try {
+        setOperationLoading(true);
+        await deleteFood(id);
+      } catch (err) {
+        alert(err instanceof Error ? err.message : 'Failed to delete food');
+      } finally {
+        setOperationLoading(false);
+      }
+    }
+  };
+
+  const handleSubmitFood = async (data: CreateFoodData) => {
+    try {
+      setOperationLoading(true);
+      
+      if (editingFood) {
+        await updateFood(editingFood.id, data);
+      } else {
+        await createFood(data);
+      }
+      
+      setIsModalOpen(false);
+      setEditingFood(null);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to save food');
+      throw err; // Re-throw to let form handle it
+    } finally {
+      setOperationLoading(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingFood(null);
+  };
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.tsx file.
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header />
+      
+      <main className="flex-1 container mx-auto px-4 py-8">
+        {/* Page Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            FoodWagen
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Discover and manage your favorite food items from various restaurants
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* Controls Section */}
+        <section className="food-controls mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
+            <div className="flex-1 max-w-md">
+              <SearchBar
+                value={searchTerm}
+                onChange={handleSearch}
+                placeholder="Search for food items..."
+              />
+            </div>
+            <button
+              onClick={handleAddFood}
+              className="food-add-btn bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium"
+              data-test-id="food-add-btn"
+            >
+              Add Food
+            </button>
+          </div>
+        </section>
+
+        {/* Content Section */}
+        <section className="food-content">
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+              <p className="text-red-800">{error}</p>
+            </div>
+          )}
+
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="food-loading text-gray-600">
+                Loading food items...
+              </div>
+            </div>
+          ) : foods.length === 0 ? (
+            <div className="empty-state-message text-center py-12">
+              <div className="text-gray-500 text-lg mb-2">
+                {searchTerm ? 'No food items found matching your search.' : 'No food items available.'}
+              </div>
+              <p className="text-gray-400">
+                {searchTerm ? 'Try adjusting your search terms.' : 'Add some delicious food to get started!'}
+              </p>
+            </div>
+          ) : (
+            <div className="food-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {foods.map((food) => (
+                <FoodCard
+                  key={food.id}
+                  food={food}
+                  onEdit={handleEditFood}
+                  onDelete={handleDeleteFood}
+                  isLoading={operationLoading}
+                />
+              ))}
+            </div>
+          )}
+        </section>
       </main>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <FoodModal
+          food={editingFood}
+          onSubmit={handleSubmitFood}
+          onClose={handleCloseModal}
+          isLoading={operationLoading}
+        />
+      )}
+
+      <Footer />
     </div>
   );
 }
