@@ -1,25 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false, // Disable strict mode to avoid double rendering issues
+  reactStrictMode: true,
   swcMinify: true,
   images: {
-    unoptimized: true, // Disable image optimization to avoid build issues
+    domains: ['images.unsplash.com', 'via.placeholder.com'],
+    unoptimized: true,
   },
   typescript: {
-    ignoreBuildErrors: true, // Ignore all TypeScript errors
+    ignoreBuildErrors: true, // TEMPORARY: Set to true to bypass TypeScript errors
   },
   eslint: {
-    ignoreDuringBuilds: true, // Ignore all ESLint errors
+    ignoreDuringBuilds: true, // TEMPORARY: Set to true to bypass ESLint errors
   },
-  webpack: (config: { resolve: { fallback: any; }; }) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-    };
-    return config;
-  },
+  trailingSlash: true,
+  
 }
 
 module.exports = nextConfig
+
+
+
