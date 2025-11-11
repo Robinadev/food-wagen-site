@@ -7,8 +7,6 @@ import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
 import { foodApi } from '../lib/api';
 
-// Import CSS
-import '../styles/globals.css';
 
 // Fallback data
 const fallbackFeaturedMeals: FeaturedMeal[] = [
