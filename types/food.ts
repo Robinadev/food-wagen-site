@@ -4,7 +4,7 @@ export interface Restaurant {
   status: 'Open Now' | 'Closed';
 }
 
-export interface FoodItem {  // Fixed typo
+export interface FoodItem {
   id: string;
   name: string;
   price: number;
