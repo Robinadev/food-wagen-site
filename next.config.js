@@ -13,6 +13,12 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   trailingSlash: true,
+  experimental: {
+    turbopack: {
+      // Set the root directory explicitly
+      root: __dirname,
+    },
+  },
 };
 
 module.exports = nextConfig;
