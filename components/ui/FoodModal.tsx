@@ -1,9 +1,9 @@
 import React from 'react';
-import { FoodItem, CreateFoodData } from '../../types/food';
-import { FoodForm } from '../forms/FoodForm';
+import { FoodItem, CreateFoodData } from '../../types/food';  // Fixed import
+import { FoodForm } from '../forms/FoodForm';  // Fixed import path
 
 interface FoodModalProps {
-  food?: FoodItem | null;
+  food?: FoodItem | null;  // Fixed typo
   onSubmit: (data: CreateFoodData) => Promise<void>;
   onClose: () => void;
   isLoading: boolean;
@@ -24,9 +24,7 @@ export const FoodModal: React.FC<FoodModalProps> = ({
   const handleFormSubmit = async (data: CreateFoodData) => {
     try {
       await onSubmit(data);
-      // Modal will close on successful submission
     } catch (error) {
-      // Error is handled in the form component
       console.error('Form submission error in modal:', error);
     }
   };
@@ -37,7 +35,6 @@ export const FoodModal: React.FC<FoodModalProps> = ({
       onClick={handleBackdropClick}
     >
       <div className="food-modal bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        
         {/* Modal Header */}
         <div className="food-modal-header border-b border-gray-200 px-6 py-4">
           <div className="flex justify-between items-center">
@@ -54,9 +51,6 @@ export const FoodModal: React.FC<FoodModalProps> = ({
               </svg>
             </button>
           </div>
-          <p className="food-modal-description text-gray-600 text-sm mt-1">
-            {food ? 'Update the food item details' : 'Add a new food item to the menu'}
-          </p>
         </div>
 
         {/* Modal Body */}

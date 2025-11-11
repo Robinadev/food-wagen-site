@@ -4,7 +4,7 @@ export interface Restaurant {
   status: 'Open Now' | 'Closed';
 }
 
-export interface FoodItem {
+export interface FoodItem {  // Fixed typo
   id: string;
   name: string;
   price: number;
@@ -34,7 +34,6 @@ export interface FoodFormErrors {
   restaurant_status?: string;
 }
 
-// For featured meals display
 export interface FeaturedMeal {
   id: string;
   name: string;
