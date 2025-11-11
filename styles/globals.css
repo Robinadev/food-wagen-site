@@ -2,11 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Animations */
+/* Custom FoodWagen Styles */
+@layer components {
+  /* Hero Section */
+  .food-hero {
+    background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  }
+
+  .food-hero-title {
+    background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Delivery Toggle */
+  .food-delivery-toggle {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  /* Meal Cards */
+  .food-meal-card {
+    animation: slideUp 0.3s ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .food-meal-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Search Input */
+  .food-search-input {
+    border-radius: 12px;
+    font-size: 1.125rem;
+  }
+
+  .food-search-input::placeholder {
+    color: #9ca3af;
+  }
+
+  .food-search-input:focus {
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  }
+
+  /* Buttons */
+  .food-find-meal-btn {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .food-find-meal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.4);
+  }
+
+  /* Footer Links */
+  .food-footer-link {
+    transition: all 0.2s ease;
+  }
+
+  .food-footer-link:hover {
+    transform: translateX(4px);
+  }
+}
+
+/* Animations */
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -14,49 +80,53 @@
   }
 }
 
-/* Food-specific styles with required prefixes */
-.food-card {
-  animation: slideUp 0.3s ease-out;
-}
-
-.food-input {
-  transition: all 0.2s ease-in-out;
-}
-
-.food-input:focus {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-/* Loading spinner */
-.food-loading-spinner {
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .food-modal {
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-/* Hover animations that don't affect dimensions */
-.food-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+/* Responsive Design */
+@media (max-width: 768px) {
+  .food-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .food-hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .food-delivery-toggle {
+    width: 100%;
+  }
+  
+  .food-delivery-btn,
+  .food-pickup-btn {
+    flex: 1;
+    text-align: center;
+  }
 }
 
-/* Ensure no layout shift on hover */
-.food-card {
-  transform: translateY(0);
-  transition: all 0.15s ease-out;
+/* Line clamp utility */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+.food-nav-link:focus,
+.food-footer-link:focus,
+.food-find-meal-btn:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
 }
