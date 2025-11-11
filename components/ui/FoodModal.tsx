@@ -1,75 +1,28 @@
 import React from 'react';
 
-// Define types locally to avoid import issues
-interface FoodItem {
-  id: string;
-  name: string;
-  price: number;
-  rating: number;
-  image: string;
-  restaurant: {
-    name: string;
-    logo: string;
-    status: 'Open Now' | 'Closed';
-  };
-}
-
-interface CreateFoodData {
-  name: string;
-  price: number;
-  rating: number;
-  image: string;
-  restaurant_name: string;
-  restaurant_logo: string;
-  restaurant_status: 'Open Now' | 'Closed';
-}
-
+// Simple interface to avoid type issues
 interface FoodModalProps {
-  food?: FoodItem | null;
-  onSubmit: (data: CreateFoodData) => Promise<void>;
+  food?: any;
+  onSubmit?: (data: any) => Promise<void>;
   onClose: () => void;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
-
-// Import FoodForm dynamically to avoid build issues
-type FoodFormProps = {
-  initialData?: FoodItem;
-  onSubmit: (data: CreateFoodData) => Promise<void>;
-  onCancel: () => void;
-  isLoading: boolean;
-};
-
-const FoodForm = React.lazy<React.ComponentType<FoodFormProps>>(() =>
-  import('../forms/FoodForm').then((mod) => {
-    // If the module has a default export, use it; otherwise fall back to named export 'FoodForm'
-    const comp = (mod as any).default ?? (mod as any).FoodForm;
-    return { default: comp } as any;
-  })
-);
 
 export const FoodModal: React.FC<FoodModalProps> = ({
-  food,
-  onSubmit,
   onClose,
-  isLoading
+  isLoading = false
 }) => {
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
     <div 
       className="food-modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-      onClick={handleBackdropClick}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div className="food-modal bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* Modal Header */}
         <div className="food-modal-header border-b border-gray-200 px-6 py-4">
           <div className="flex justify-between items-center">
             <h2 className="food-modal-title text-xl font-bold text-gray-900">
-              {food ? 'Edit Food Item' : 'Add New Food Item'}
+              Add Food Item
             </h2>
             <button
               onClick={onClose}
@@ -83,16 +36,46 @@ export const FoodModal: React.FC<FoodModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Body */}
+        {/* Modal Body - Simple Form */}
         <div className="food-modal-body p-6">
-          <React.Suspense fallback={<div>Loading form...</div>}>
-            <FoodForm
-              initialData={food || undefined}
-              onSubmit={onSubmit}
-              onCancel={onClose}
-              isLoading={isLoading}
-            />
-          </React.Suspense>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Food Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter food name"
+                className="food-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Price
+              </label>
+              <input
+                type="number"
+                placeholder="Enter price"
+                className="food-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+
+            <div className="flex space-x-3 pt-4">
+              <button
+                onClick={onClose}
+                className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                disabled={isLoading}
+                className="flex-1 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 disabled:opacity-50 transition-colors"
+              >
+                {isLoading ? 'Adding...' : 'Add Food'}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
