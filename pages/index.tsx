@@ -24,9 +24,6 @@ export default function Home() {
             <h1>Are you starving?</h1>
             <p>Within a few clicks, find meals that are accessible near you</p>
           </div>
-          
-          
-           // In pages/index.tsx - update the hero image section
 <div className="hero-image">
   <img 
     src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=400&fit=crop" 
