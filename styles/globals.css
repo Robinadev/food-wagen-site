@@ -144,7 +144,62 @@ body {
   height: 24px;
   border-radius: 50%;
 }
+/* Add these to your existing globals.css */
 
+/* Hero Image Styles */
+.hero-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Remove badge styles since we're removing it */
+.hero-badge {
+  display: none;
+}
+
+/* Meal Image Styles */
+.meal-image {
+  width: 100%;
+  height: 200px;
+  background: #f8f8f8;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.meal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.meal-card:hover .meal-image img {
+  transform: scale(1.05);
+}
+
+/* Delivery Time Badge */
+.delivery-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 .hero-badge span {
   font-weight: 500;
   color: var(--text-dark);

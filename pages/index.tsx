@@ -21,16 +21,23 @@ export default function Home() {
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
-            <div className="hero-badge">
-              <span>@alweny@ckun</span>
-            </div>
             <h1>Are you starving?</h1>
             <p>Within a few clicks, find meals that are accessible near you</p>
           </div>
           
-          <div className="hero-search">
-            <SearchSection />
-          </div>
+          
+           // In pages/index.tsx - update the hero image section
+<div className="hero-image">
+  <img 
+    src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=400&fit=crop" 
+    alt="Delicious Pizza"
+    width={500}
+    height={400}
+  />
+</div>
+          <div className="container" style={{ marginTop: '40px' }}>
+          <SearchSection />
+        </div>
         </div>
       </section>
 

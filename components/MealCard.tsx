@@ -1,5 +1,6 @@
 // components/MealCard.tsx
 import { Meal } from '../types';
+import Image from 'next/image';
 
 interface MealCardProps {
   meal: Meal;
@@ -10,7 +11,16 @@ export default function MealCard({ meal, onAddToCart }: MealCardProps) {
   return (
     <div className="meal-card">
       <div className="meal-image">
-        {meal.image}
+        <Image
+          src={meal.image}
+          alt={meal.name}
+          width={280}
+          height={200}
+          style={{ objectFit: 'cover' }}
+        />
+        <div className="delivery-badge">
+          {meal.deliveryTime}
+        </div>
       </div>
       <div className="meal-content">
         <div className="meal-header">
@@ -29,7 +39,7 @@ export default function MealCard({ meal, onAddToCart }: MealCardProps) {
           className="add-to-cart"
           onClick={() => onAddToCart(meal)}
         >
-          Add to Cart • {meal.deliveryTime}
+          Add to Cart
         </button>
       </div>
     </div>

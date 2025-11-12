@@ -10,7 +10,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.6,
     reviewCount: 128,
     category: "Chicken",
-    image: "🍗",
+    image: "https://images.unsplash.com/photo-1606755962773-d324e3832b86?w=400&h=300&fit=crop",
     deliveryTime: "20-30 min"
   },
   {
@@ -21,7 +21,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.2,
     reviewCount: 89,
     category: "Dessert",
-    image: "🍌",
+    image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=300&fit=crop",
     deliveryTime: "15-25 min"
   },
   {
@@ -32,7 +32,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.0,
     reviewCount: 156,
     category: "Pizza",
-    image: "🍕",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
     deliveryTime: "25-35 min"
   },
   {
@@ -43,7 +43,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.8,
     reviewCount: 203,
     category: "Special",
-    image: "🍛",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
     deliveryTime: "15-20 min"
   },
   {
@@ -54,7 +54,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.5,
     reviewCount: 167,
     category: "Pasta",
-    image: "🍝",
+    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=300&fit=crop",
     deliveryTime: "20-25 min"
   },
   {
@@ -65,7 +65,7 @@ export const featuredMeals: Meal[] = [
     rating: 5.0,
     reviewCount: 94,
     category: "Sandwich",
-    image: "🥪",
+    image: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400&h=300&fit=crop",
     deliveryTime: "15-20 min"
   },
   {
@@ -76,7 +76,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.5,
     reviewCount: 78,
     category: "Potatoes",
-    image: "🥔",
+    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
     deliveryTime: "20-30 min"
   },
   {
@@ -87,7 +87,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.7,
     reviewCount: 456,
     category: "Chicken",
-    image: "🍗",
+    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
     deliveryTime: "25-35 min"
   },
   {
@@ -98,7 +98,7 @@ export const featuredMeals: Meal[] = [
     rating: 5.0,
     reviewCount: 134,
     category: "Potatoes",
-    image: "🍟",
+    image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop",
     deliveryTime: "15-25 min"
   },
   {
@@ -109,7 +109,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.3,
     reviewCount: 67,
     category: "Snacks",
-    image: "🎮",
+    image: "https://images.unsplash.com/photo-1550253006-0f19cd4e8261?w=400&h=300&fit=crop",
     deliveryTime: "20-30 min"
   },
   {
@@ -120,7 +120,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.5,
     reviewCount: 189,
     category: "Chicken",
-    image: "🌶️",
+    image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop",
     deliveryTime: "25-35 min"
   },
   {
@@ -131,7 +131,7 @@ export const featuredMeals: Meal[] = [
     rating: 4.9,
     reviewCount: 223,
     category: "Dessert",
-    image: "🍰",
+    image: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&h=300&fit=crop",
     deliveryTime: "15-20 min"
   }
 ];
