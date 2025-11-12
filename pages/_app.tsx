@@ -10,9 +10,21 @@ export default function App({ Component, pageProps }: AppProps) {
     setIsMounted(true);
   }, []);
 
-  // Prevent hydration mismatch
   if (!isMounted) {
-    return null;
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        background: 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)',
+        color: '#333',
+        fontSize: '1.2rem',
+        fontFamily: 'Inter, sans-serif'
+      }}>
+        Loading FoodWagen...
+      </div>
+    );
   }
 
   return <Component {...pageProps} />;
