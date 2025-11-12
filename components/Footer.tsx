@@ -51,7 +51,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>All rights Reserved © Your Company, 2024</p>
+          <p>All rights Reserved © Rihobot E, 2025</p>
           <p>Made with ❤️ by FoodWagen</p>
         </div>
       </div>
